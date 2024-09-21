@@ -14,31 +14,35 @@
         style="font-size: 2rem; font-family: 'Arial', sans-serif; padding: 1rem; text-align: right;">
         @if (weatherData != null && !getWeatherError)
         {
-            <div>
-                <img src="https://openweathermap.org/img/w/@(weatherData.Weather[0].Icon).png" alt="Weather Icon"
-                    style="width: 80px; height: 80px;" />
-                <div>@weatherData.Main.Temp°F - @CapitalizeDescription(weatherData.Weather[0].Description)</div>
-            </div>
+                                                                        <div>
+                                                                            <img src="https://openweathermap.org/img/w/@(weatherData.Weather[0].Icon).png" alt="Weather Icon"
+                                                                                style="width: 80px; height: 80px;" />
+                                                                            <div>@weatherData.Main.Temp°F - @CapitalizeDescription(weatherData.Weather[0].Description)</div>
+                                                                        </div>
         }
         else if (getWeatherError)
         {
-            <div>Error fetching weather data</div>
+                                                                        <div>Error fetching weather data</div>
         }
         else
         {
-            <div>Loading weather data...</div>
+                                                                        <div>Loading weather data...</div>
         }
     </div>
 </div>
 
-@if (weatherwarning)
-{<br>
-    <div class="alert alert-danger d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" style="font-size: 2rem; font-family: 'Arial'" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
-        <div>
-            <strong>Warning</strong> Dangerous Heat Index: Find Shelter and Cool Off
-        </div>
-    </div>
+@if (true)
+{
+                                                            <br>
+                                                                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                                                        <div class="mx-3 d-flex flex-row justify-content-evenly w-100">
+                                                                            <p class="my-0 align-self-center">Dangerous Heat Index: Find Shelter and Cool Off</p>
+                                                                            <a 
+                                                                                href="https://apex.oracle.com/pls/apex/r/gfledu/search-smart-database145634/shelters-near-me"
+                                                                                class="btn btn-danger ms-auto">Find Near Me</a>
+                                                                        </div>
+                                                                    </div>
 }
 <div class="button-group" style="margin-top: 2rem;">
     <NavLink href="shelters">
