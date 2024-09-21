@@ -14,19 +14,19 @@
         style="font-size: 2rem; font-family: 'Arial', sans-serif; padding: 1rem; text-align: right;">
         @if (weatherData != null && !getWeatherError)
         {
-                <div>
-                    <img src="https://openweathermap.org/img/w/@(weatherData?.Weather?[0]?.Icon ?? "default").png" alt="Weather Icon"
-                        style="width: 80px; height: 80px;" />
-                    <div>@(weatherData?.Main?.Temp ?? 0)°F - @(CapitalizeDescription(weatherData?.Weather?[0]?.Description ?? "Unknown"))</div>
-                </div>
+            <div>
+                <img src="https://openweathermap.org/img/w/@(weatherData?.Weather?[0]?.Icon ?? "default").png" alt="Weather Icon"
+                    style="width: 80px; height: 80px;" />
+                <div>@(weatherData?.Main?.Temp ?? 0)°F - @(CapitalizeDescription(weatherData?.Weather?[0]?.Description ?? "Unknown"))</div>
+            </div>
         }
         else if (getWeatherError)
         {
-                                                                            <div>Error fetching weather data</div>
+            <div>Error fetching weather data</div>
         }
         else
         {
-                                                                            <div>Loading weather data...</div>
+            <div>Loading weather data...</div>
         }
     </div>
 </div>
@@ -37,7 +37,7 @@
                                                                     <div class="alert alert-danger d-flex align-items-center" role="alert">
                                                                             <i class="bi bi-exclamation-triangle-fill"></i>
                                                                             <div class="mx-3 d-flex flex-row justify-content-evenly w-100">
-                                                                                <p class="my-0 align-self-center">Dangerous Heat: Find Shelter and Cool Off</p>
+                                                                                <p class="my-0 align-self-center">Severe heat conditions are forecasted in your area. Please take care and find shelter</p>
                                                                                 <a 
                                                                                     href="https://apex.oracle.com/pls/apex/r/gfledu/search-smart-database145634/shelters-near-me"
                                                                                     class="btn btn-danger ms-auto">Find Near Me</a>
@@ -75,7 +75,7 @@
     <NavLink href="donations">
         <button class="btn mt-2"
             style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
-            Donations
+            Pay It Forward
         </button>
     </NavLink>
     <NavLink href="jobs">

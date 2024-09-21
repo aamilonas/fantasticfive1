@@ -10,6 +10,13 @@
 4. Jonaé Davidson
 5. Yanheng Chen
 
+## Technical Summary
+
+Web Application Framework: Blazor Server Side (.NET)
+QR Codes:
+Weather API: Open Weather
+Interactive Shelter Map: Oracle APEX
+
 ## How to Run App Locally
 
 1. Download .net

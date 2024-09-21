@@ -22,5 +22,6 @@ public class Shelter
     public bool? PetFriendly { get; set; }
 
     public bool? AllWelcome { get; set; }
+    public double Distance { get; set; }
 
 }
