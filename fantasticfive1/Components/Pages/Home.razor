@@ -109,7 +109,7 @@
         {
             getWeatherError = true;
         }
-        if (weatherData.Main.Temp > 60)
+        if (weatherData != null && weatherData.Main != null && weatherData.Main.Temp > 60)
         {
             weatherwarning = true;
         }
