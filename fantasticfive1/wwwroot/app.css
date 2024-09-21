@@ -11,10 +11,25 @@ body {
     color: #fff;
 }
 
+nav {
+    text-align: right;
+    font-size: 2em;
+}
+
 main {
     background-color: #FFF;
     border-radius: 1rem;
     color: #333;
+}
+
+main header {
+    text-align: center;
+}
+
+main header img {
+    
+    height: auto;
+    max-width: 40%;
 }
 
 .btn-primary {
