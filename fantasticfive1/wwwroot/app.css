@@ -7,8 +7,14 @@ a, .btn-link {
 }
 
 body {
-    background-color: #264653; /* Set the background color */
+    background-color: #E9C46A; /* Set the background color */
     color: #fff;
+}
+
+main {
+    background-color: #FFF;
+    border-radius: 1rem;
+    color: #333;
 }
 
 .btn-primary {
