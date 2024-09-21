@@ -1,7 +1,63 @@
 ﻿@page "/harmreduction"
 
-<h3>HarmReduction</h3>
+<PageTitle>Let's Be Painless</PageTitle>
+<div class="container">
+    <h1>Let's Be Painless</h1>
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Phone Number</th>
+                <th>Remaining</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var location in locations)
+            {
+                <tr>
+                    <td>@location.Name</td>
+                    <td>@location.PhoneNumber</td>
+                    <td>@location.RemainingCount</td>
+                    <td>
+                        @if (location.RemainingCount > 0)
+                        {
+                            <a href="/donations/food/getnow/@location.Name" class="btn btn-primary">Get Now</a>
+                        }
+                        else
+                        {
+                            <strong>Try Again later</strong>
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
 
 @code {
 
+    private Location[] locations = new Location[5];
+
+    protected override void OnInitialized()
+    {
+        Random rand = new Random();
+        locations[0] = new Location { Name = "Clean Needles", RemainingCount = rand.Next(10), PhoneNumber = "754-123-4567" };
+        locations[1] = new Location { Name = "Pain Free", RemainingCount = rand.Next(10), PhoneNumber = "754-234-5678" };
+        locations[2] = new Location { Name = "No Pain", RemainingCount = 0, PhoneNumber = "754-345-6789" };
+        locations[3] = new Location { Name = "Heavenly", RemainingCount = 0, PhoneNumber = "754-456-7890" };
+        locations[4] = new Location { Name = "Bliss", RemainingCount = rand.Next(10), PhoneNumber = "754-567-8901" };
+    }
+
+    public class Location
+    {
+        public string? Name { get; set; }
+        public int? RemainingCount { get; set; }
+
+        public string? PhoneNumber { get; set; }
+
+
+    }
 }
