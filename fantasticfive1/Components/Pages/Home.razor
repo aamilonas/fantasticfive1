@@ -95,7 +95,7 @@
         var timer = new System.Threading.Timer(UpdateClock, null, 0, 1000);
 
         var request = new HttpRequestMessage(HttpMethod.Get,
-        "https://api.openweathermap.org/data/2.5/weather?lat=26.2015614&lon=-80.294&appid=d98137e9d65039fd44a40bc77091ed0b&units=imperial");
+        "https://api.openweathermap.org/data/2.5/weather?lat=26.2015614&lon=-80.294&appid=8ed9d02627a9aeb6207c2af913d2b217&units=imperial");
         var client = HttpClientFactory.CreateClient();
 
         var response = await client.SendAsync(request);
