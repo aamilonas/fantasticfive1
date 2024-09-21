@@ -14,21 +14,21 @@
         <tbody>
             @foreach (var location in locations)
             {
-                <tr>
-                    <td>@location.Name</td>
-                    <td>@location.VoucherCount</td>
-                    <td>
+                    <tr>
+                        <td>@location.Name</td>
+                        <td>@location.VoucherCount</td>
+                        <td>
                         @if (location.VoucherCount > 0)
                         {
-                            <a href="/donations/food/getnow/@location.Name" class="btn btn-primary">Get Now</a>
+                                    <a href="/donations/food/getnow/@location.Name" class="btn btn color-4 w-100">Get Now</a>
                         }
                         else
                         {
-                            <strong>Try Again later</strong>
+                                    <p class="text-center"><strong>Try Again later</strong></p>
                         }
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
             }
 
         </tbody>

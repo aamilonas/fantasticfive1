@@ -1,15 +1,14 @@
 ﻿@page "/harmreduction"
 
-<PageTitle>Let's Be Painless</PageTitle>
+<PageTitle>Support Squad: Harm Reduction</PageTitle>
 <div class="container">
-    <h1>Let's Be Painless</h1>
-    <table class="table table-light">
+    <h2 class="display-1">Harm Reduction</h2>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Location</th>
                 <th>Phone Number</th>
-                <th>Remaining</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,16 +17,8 @@
                 <tr>
                     <td>@location.Name</td>
                     <td>@location.PhoneNumber</td>
-                    <td>@location.RemainingCount</td>
                     <td>
-                        @if (location.RemainingCount > 0)
-                        {
-                            <a href="/donations/food/getnow/@location.Name" class="btn btn-primary">Get Now</a>
-                        }
-                        else
-                        {
-                            <strong>Try Again later</strong>
-                        }
+                        <a href="/donations/food/getnow/@location.Name" class="btn color-3 w-100">Go Now</a>
 
                     </td>
                 </tr>
@@ -39,16 +30,25 @@
 
 @code {
 
-    private Location[] locations = new Location[5];
+    private Location[] locations = new Location[3];
 
     protected override void OnInitialized()
     {
         Random rand = new Random();
-        locations[0] = new Location { Name = "Clean Needles", RemainingCount = rand.Next(10), PhoneNumber = "754-123-4567" };
-        locations[1] = new Location { Name = "Pain Free", RemainingCount = rand.Next(10), PhoneNumber = "754-234-5678" };
-        locations[2] = new Location { Name = "No Pain", RemainingCount = 0, PhoneNumber = "754-345-6789" };
-        locations[3] = new Location { Name = "Heavenly", RemainingCount = 0, PhoneNumber = "754-456-7890" };
-        locations[4] = new Location { Name = "Bliss", RemainingCount = rand.Next(10), PhoneNumber = "754-567-8901" };
+        locations[0] = new Location { Name = "The Spot Broward", RemainingCount = rand.Next(10), PhoneNumber = "754-123-4567" };
+        locations[1] = new Location
+            {
+                Name = "Florida Harm Reduction Collective",
+                RemainingCount = rand.Next(10),
+                PhoneNumber = "754 - 234 - 5678"
+            };
+        locations[2] = new Location
+            {
+                Name = "Broward Addiction Recovery Center",
+                RemainingCount = 0,
+                PhoneNumber =
+            "754-345-6789"
+            };
     }
 
     public class Location

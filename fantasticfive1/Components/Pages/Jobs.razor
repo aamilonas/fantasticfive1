@@ -3,18 +3,16 @@
 @using fantasticfive1.Data
 @inject fantasticfive1.Data.LookupService lookupservice;
 
-<PageTitle>Jobs</PageTitle>
-<h1>Jobs</h1>
-
-<p>Jobs that you may apply for</p>
-
-
-    <div class="container">
-    <div class="row">
-        @foreach (var job in jobs) {
-            <div class="col-md-4" style="margin-bottom: 20px;">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;" alt="Plumber"/>
+<PageTitle>Support Squad: Jobs</PageTitle>
+<h2 class="display-1">Jobs</h2>
+<div class="container">
+    <div class="row w-100">
+        @foreach (var job in jobs)
+        {
+            <div class="col-4" style="margin-bottom: 20px;">
+                <div class="card" style="height: 520px;">
+                    <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg"
+                        style="margin-bottom: 0;" alt="Plumber" />
                     <div class="card-body">
                         <h5 class="card-title" style="margin: 0; color: black;">@job.Title</h5>
                         <p class="card-text" style="margin: 0; color: black;">@job.Time to @job.Expires</p>
@@ -23,7 +21,8 @@
                         <li class="list-group-item" style="padding: 10px;">Description: @job.Description</li>
                         <li class="list-group-item" style="padding: 10px;">Experience: @job.Experience</li>
                         <li class="list-group-item" style="padding: 10px;">
-                            <a href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
+                            <a class="btn color-3 w-100"
+                                href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
                         </li>
                     </ul>
                 </div>
@@ -33,7 +32,7 @@
 </div>
 
 
-    
+
 @code {
 
     private List<Job> jobs = new List<Job>();
