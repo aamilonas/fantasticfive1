@@ -12,7 +12,7 @@
 
 ## Technical Summary
 
-| Blazor (.NET) | Apex Oracle | SQLite | Bootstrap | QR Code |
+| Blazor (.NET) | Apex Oracle | SQLite | Bootstrap | Open Weather API | QR Server API
 
 ## How to Run App Locally
 

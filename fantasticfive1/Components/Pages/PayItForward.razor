@@ -19,8 +19,8 @@
         <div class="mb-3">
             <label for="passType" class="form-label">Donation Type</label>
             <select id="passType" class="form-select" @bind="NewDonation.PassType">
-                <option value=0>Food</option>
-                <option value=1>Hygiene</option>
+                <option value="@PassType.Food">Food</option>
+                <option value="@PassType.Hygiene">Hygiene</option>
             </select>
         </div>
         <div class="mb-3">
@@ -48,7 +48,6 @@ else
     {
         ShowCreate = true;
         NewDonation = new DonationPass();
-        NewDonation.DonorEmail = "test@Test";
     }
 
     public void CreateNewDonation()
