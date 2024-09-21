@@ -8,27 +8,31 @@
 
 <p>Jobs that you may apply for</p>
 
-<div class="control-section" style="display: flex; justify-content: center; ">
-    @foreach (var job in jobs) {
-        <div class="row">
-            <div class="card" style="width: 18rem; margin-bottom: 20px;">
-              <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;"  alt="Plumber"/>
-              <div class="card-body">
-                <h5 class="card-title" style="margin: 0; color: black;">@job.Title</h5>
-                <p class="card-text" style="margin: 0; color: black;">@job.Time to @job.Expires </p>
-              </div>
-              <ul class="list-group list-group-flush" style="margin-top:0;">
-                <li class="list-group-item" style="padding: 10px;">Description: @job.Description</li>
-                <li class="list-group-item" style="padding: 10px;">Experience: @job.Experience</li>
-                <li class="list-group-item" style="padding: 10px;">
-                    <a href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
-                </li>
 
-              </ul>
+    <div class="container">
+    <div class="row">
+        @foreach (var job in jobs) {
+            <div class="col-md-4" style="margin-bottom: 20px;">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;" alt="Plumber"/>
+                    <div class="card-body">
+                        <h5 class="card-title" style="margin: 0; color: black;">@job.Title</h5>
+                        <p class="card-text" style="margin: 0; color: black;">@job.Time to @job.Expires</p>
+                    </div>
+                    <ul class="list-group list-group-flush" style="margin-top:0;">
+                        <li class="list-group-item" style="padding: 10px;">Description: @job.Description</li>
+                        <li class="list-group-item" style="padding: 10px;">Experience: @job.Experience</li>
+                        <li class="list-group-item" style="padding: 10px;">
+                            <a href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
+
+
     
 @code {
 

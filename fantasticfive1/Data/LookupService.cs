@@ -78,7 +78,7 @@ namespace fantasticfive1.Data
             return housing;
         }
 
-        public async Task<List<Shelter>> ShelterLookupWQs(int WomenChildren , int PetFriendly)
+        public async Task<List<Shelter>> ShelterLookupWQs(int WomenChildren, int PetFriendly)
         {
             List<Shelter> housing = new List<Shelter>();
 
