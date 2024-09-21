@@ -1,0 +1,29 @@
+@page "/donations/food/getnow/{name}"
+
+<div class="d-flex justify-content-center">
+
+    <div class="card" style="width: 18rem">
+        <img src="@url" class="card-img-top" @ />
+        <div class="card-body text-primary">
+            <h5 class="card-title">@Name Pass</h5>
+            <div class="d-grid gap-2">
+                <a href="/payitforward" class="btn color-3">Pay It Forward</a>
+                <a href="/donations" class="btn color-4">Back to Donations</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public string? Name { get; set; }
+    private Guid uuid = System.Guid.NewGuid();
+    private string? url;
+
+    protected override void OnInitialized()
+    {
+        url = $"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={Name}";
+    }
+}
