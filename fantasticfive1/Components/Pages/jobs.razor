@@ -1,0 +1,101 @@
+@page "/jobs"
+@using fantasticfive1.Models
+@using fantasticfive1.Data
+@inject fantasticfive1.Data.LookupService lookupservice;
+
+<PageTitle>Jobs</PageTitle>
+<h1>Jobs</h1>
+
+<p>Jobs that you may apply for</p>
+
+<!--<div class="control-section" style="display: flex; justify-content: center; "> -->
+    @foreach (var job in jobs) {
+        <div class="row">
+            <div class="card" style="width: 18rem; margin-bottom: 20px;">
+              <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;"  alt="Plumber"/>
+              <div class="card-body">
+                <h5 class="card-title" style="margin: 0; color: black;">@job.Title</h5>
+                <p class="card-text" style="margin: 0; color: black;">@job.Time to @job.Expires </p>
+              </div>
+              <ul class="list-group list-group-flush" style="margin-top:0;">
+                <li class="list-group-item" style="padding: 10px;">@job.Description</li>
+                <li class="list-group-item" style="padding: 10px;">@job.Experience</li>
+                <li class="list-group-item" style="padding: 10px;">
+                    <a href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
+                </li>
+
+              </ul>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="card" style="width: 18rem; margin-bottom: 20px;">
+          <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;"  alt="Plumber"/>
+          <div class="card-body">
+            <h5 class="card-title" style="margin: 0; color: black;">Journeyman Plumber</h5>
+            <p class="card-text" style="margin: 0; color: black;">By Peoples plumbing & Mechanical | 09/20/2024</p>
+          </div>
+          <ul class="list-group list-group-flush" style="margin-top:0;">
+            <li class="list-group-item" style="padding: 10px;">Roto-Rooter plumbing apprentices/service technicians use their skills to provide solutions to plumbing and drain problems.</li>
+            <li class="list-group-item" style="padding: 10px;">
+                <a href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
+            </li>
+    
+          </ul>
+        </div>
+    </div>
+
+        @*<div class="card" style="width: 18rem; margin-bottom: 20px;">
+          <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;"  alt="Plumber" />
+          <div class="card-body">
+            <h5 class="card-title" style="margin: 0; color: black;">Foreman</h5>
+            <p class="card-text" style="margin: 0; color: black;">By JT Roofing | 09/20/2024</p>
+          </div>
+          <ul class="list-group list-group-flush" style="margin-top:0;">
+            <li class="list-group-item" style="margin: 0; color: black;">We are seeking a skilled Commercial Roofing Superintendent/Project Manager to join our dynamic team.</li>
+            <li class="list-group-item" style="margin: 0; color: black;">
+                <a href="https://www.indeed.com/q-construction-jobs-l-tamarac,-fl-jobs.html?vjk=a5830a3e0df83fa7&advn=6487612633005511">Apply</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" style="width: 18rem; margin-bottom: 20px;" >
+          <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;"  alt="Plumber" />
+          <div class="card-body">
+            <h5 class="card-title" style="margin: 0; color: black;" >Asphalt Plant Foreman</h5>
+            <p class="card-text" style="margin: 0; color: black;">By Ajax Paving Industries | 09/20/2024</p>
+          </div>
+          <ul class="list-group list-group-flush" style="margin-top:0;">
+            <li class="list-group-item">Asphalt Plant Foreman will be held accountable for operation and maintenance of the asphalt plant.</li>
+            <li class="list-group-item">
+                <a href="https://www.indeed.com/q-construction-jobs-l-tamarac,-fl-jobs.html?vjk=d15ecffa25d7ae97&advn=6897474639008615">Apply</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" style="width: 18rem; margin-bottom: 20px;">
+          <img src="https://icscomplete.com/wp-content/uploads/2022/02/VanSchendel-Construction.jpeg" style="margin-bottom: 0;"  alt="Plumber" />
+          <div class="card-body">
+            <h5 class="card-title" style="margin: 0; color: black;">Plumber $30+ hr, benefits</h5>
+            <p class="card-text" style="margin: 0; color: black;">By PHASE Services | 09/20/2024</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">PHASE Services is a Boca Raton-based plumbing contractor with a 17-year track record of excellence in commercial construction.</li>
+            <li class="list-group-item">
+                <a href="https://www.indeed.com/q-construction-jobs-l-tamarac,-fl-jobs.html?vjk=76f7d70a15be6aa5&advn=5708516900425448">Apply</a>
+            </li>
+          </ul>
+        </div>
+    </div>*@
+<!-- </div> -->
+
+
+@code {
+
+    private List<Job> jobs = new List<Job>();
+    protected override async void OnInitialized()
+    {
+        jobs = await lookupservice.JobLookup();
+    }
+}
