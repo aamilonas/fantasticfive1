@@ -104,15 +104,17 @@
         {
             using var responseStream = await response.Content.ReadAsStreamAsync();
             weatherData = await JsonSerializer.DeserializeAsync<WeatherResponse>(responseStream);
+
+            if (weatherData != null && weatherData.Main != null && weatherData.Main.Temp > 60)
+            {
+                weatherwarning = true;
+            }
         }
         else
         {
             getWeatherError = true;
         }
-        if (weatherData != null && weatherData.Main != null && weatherData.Main.Temp > 60)
-        {
-            weatherwarning = true;
-        }
+
         StateHasChanged(); // Ensure the UI updates after loading the data
     }
 
