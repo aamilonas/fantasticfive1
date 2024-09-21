@@ -2,28 +2,75 @@
 @inject IHttpClientFactory HttpClientFactory;
 @using System.Text.Json
 @using System.Text.Json.Serialization
+@using System.Globalization
 
 <PageTitle>Home</PageTitle>
+<div class="container mt-4" style="display: flex; justify-content: space-between; align-items: center;">
 
-<h1>Hello, world!</h1>
+    <div class="clock" style="font-size: 3rem; font-family: 'Arial', sans-serif; padding: 1rem; margin-top: 3.5rem;">
+        @currentTime
+    </div>
 
-
-<div class="container mt-4">
-    
-    <NavLink href="shelters"><button class="btn" style="background-color: #2A9D8F; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Shelters & Housing</button></NavLink>
-    <NavLink href="donations"><button class="btn mt-2" style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Donations</button></NavLink>
-    <NavLink href="jobs"><button class="btn mt-2" style="background-color: #F4A261; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Jobs</button></NavLink>
-    <NavLink href="harmreduction"><button class="btn mt-2" style="background-color: #E76F51; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Harm Reduction</button></NavLink>
-@*     <button class="btn mt-2" style="background-color: #F9D5B0; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Jobs</button> *@
+    <div class="weather-info" style="font-size: 2rem; font-family: 'Arial', sans-serif; padding: 1rem; text-align: right;">
+        @if (weatherData != null && !getWeatherError)
+        {
+            <div>
+                <img src="https://openweathermap.org/img/w/@(weatherData.Weather[0].Icon).png" alt="Weather Icon" style="width: 80px; height: 80px;" />
+                <div>@weatherData.Main.Temp°F - @CapitalizeDescription(weatherData.Weather[0].Description)</div>
+            </div>
+        }
+        else if (getWeatherError)
+        {
+            <div>Error fetching weather data</div>
+        }
+        else
+        {
+            <div>Loading weather data...</div>
+        }
+    </div>
 </div>
+
+    <div class="button-group" style="margin-top: 2rem;">
+        <NavLink href="shelters">
+            <button class="btn" style="background-color: #2A9D8F; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+                Shelters & Housing
+            </button>
+        </NavLink>
+        <NavLink href="donations">
+            <button class="btn mt-2" style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+                Donations
+            </button>
+        </NavLink>
+        <NavLink href="jobs">
+            <button class="btn mt-2" style="background-color: #F4A261; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+                Jobs
+            </button>
+        </NavLink>
+        <NavLink href="harmreduction">
+            <button class="btn mt-2" style="background-color: #E76F51; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+                Harm Reduction
+            </button>
+        </NavLink>
+    </div>
+
 
 @code {
  
     private WeatherResponse? weatherData;
     private bool getWeatherError;
+    private string currentTime = DateTime.Now.ToString("hh:mm:ss tt");
+    
+    private string CapitalizeDescription(string description)
+    {
+        var textInfo = new CultureInfo("en-US", false).TextInfo;
+        return textInfo.ToTitleCase(description);
+    }
 
     protected override async Task OnInitializedAsync()
     {
+            // Start the clock
+        var timer = new System.Threading.Timer(UpdateClock, null, 0, 1000);
+
         var request = new HttpRequestMessage(HttpMethod.Get,
             "https://api.openweathermap.org/data/2.5/weather?lat=26.2015614&lon=-80.294&appid=d98137e9d65039fd44a40bc77091ed0b&units=imperial");
         var client = HttpClientFactory.CreateClient();
@@ -41,6 +88,12 @@
         }
 
         StateHasChanged(); // Ensure the UI updates after loading the data
+    }
+
+    private void UpdateClock(object? state)
+    {
+        currentTime = DateTime.Now.ToString("h:mm tt");
+        InvokeAsync(() => StateHasChanged());
     }
     // Define the models that match the OpenWeather API JSON structure
     public class WeatherResponse
