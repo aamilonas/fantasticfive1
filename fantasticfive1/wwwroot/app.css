@@ -7,8 +7,29 @@ a, .btn-link {
 }
 
 body {
-    background-color: #264653; /* Set the background color */
+    background-color: #E9C46A; /* Set the background color */
     color: #fff;
+}
+
+nav {
+    text-align: left;
+    font-size: 3em;
+}
+
+main {
+    background-color: #FFF;
+    border-radius: 1rem;
+    color: #333;
+}
+
+main header {
+    text-align: center;
+}
+
+main header img {
+    
+    height: auto;
+    max-width: 40%;
 }
 
 .btn-primary {
@@ -73,4 +94,10 @@ h1:focus {
 
 .color-5 {
     background-color: #E76F51;
+}
+
+.bg-dark-subtle {
+    background-color: #e6e6ff88;
+    border-radius: 1em;
+    box-shadow: 0 0 0 1px #e6e6ff;
 }

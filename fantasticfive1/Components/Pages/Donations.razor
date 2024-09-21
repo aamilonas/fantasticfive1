@@ -1,10 +1,17 @@
 @page "/donations"
-
-
-
 <PageTitle>Pay it Forward</PageTitle>
-<h1>Pay it Forward</h1>
-<div class="d-flex flex-column" style="height: 500px;">
-<button type="button" class="btn color-2 h-50">Food</button>
-<button type="button" class="btn  color-3 h-50">Hygiene</button>
+<h1 class="text-center display-1">Donations: Pay it Forward</h1>
+<div class="button-group" style="margin-top: 2rem;">
+    <NavLink href="/donations/food">
+        <button class="btn color-2 w-100 "
+            style=" color: white;  padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+            Food
+        </button>
+    </NavLink>
+    <NavLink href="/donations/hygiene">
+        <button class="btn mt-2"
+            style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+            Hygiene
+        </button>
+    </NavLink>
 </div>

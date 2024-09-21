@@ -1,7 +1,41 @@
-﻿@page "/shelters"
+﻿@* @page "/shelters"
+@using fantasticfive1.Models
 
 <h3>Shelters</h3>
 
-@code {
+<div class="mb-3">
+    <Switch @ref="switch1" @bind-Value="agree" Label="Disabled switch checkbox input" />
+</div>
+<Button Color="ButtonColor.Secondary" @onclick="Disable"> Disable </Button>
+<Button Color="ButtonColor.Primary" @onclick="Enable"> Enable </Button>
 
+<div class="row">
+    <div class="col-sm-6">
+        <Card>
+            <CardBody>
+                <CardTitle>Special title treatment</CardTitle>
+                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Link">Go somewhere</Button>
+            </CardBody>
+        </Card>
+    </div>
+    <div class="col-sm-6">
+        <Card>
+            <CardBody>
+                <CardTitle>Special title treatment</CardTitle>
+                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+                <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Link">Go somewhere</Button>
+            </CardBody>
+        </Card>
+    </div>
+</div>
+
+@code {
+    private Switch switch1 = default!;
+    private bool agree = true;
+
+    private void Disable() => switch1.Disable();
+
+    private void Enable() => switch1.Enable();
 }
+ *@
