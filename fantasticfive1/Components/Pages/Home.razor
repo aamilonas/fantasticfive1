@@ -15,9 +15,9 @@
         @if (weatherData != null && !getWeatherError)
         {
             <div>
-                <img src="https://openweathermap.org/img/w/@(weatherData.Weather[0].Icon).png" alt="Weather Icon"
+                <img src="https://openweathermap.org/img/w/@(weatherData?.Weather?[0]?.Icon ?? "default").png" alt="Weather Icon"
                     style="width: 80px; height: 80px;" />
-                <div>@weatherData.Main.Temp°F - @CapitalizeDescription(weatherData.Weather[0].Description)</div>
+                <div>@(weatherData?.Main?.Temp ?? 0)°F - @(CapitalizeDescription(weatherData?.Weather?[0]?.Description ?? "Unknown"))</div>
             </div>
         }
         else if (getWeatherError)
