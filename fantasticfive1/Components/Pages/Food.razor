@@ -1,9 +1,9 @@
 @page "/donations/food"
 
-<PageTitle>Pay it Forward - Food</PageTitle>
+<PageTitle>Pay it Forward - Food Passes</PageTitle>
 <div class="container">
-    <h1>Pay it Forward - Food</h1>
-    <table class="table">
+    <h1>Pay it Forward - Food Passes</h1>
+    <table class="table table-light">
         <thead>
             <tr>
                 <th>Location</th>
@@ -12,13 +12,48 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Popeyes</td>
-                <td>6</td>
-                <td>
-                    <NavLink href="donations/food/getnow"><button>Get Now</button></NavLink>
-                </td>
-            </tr>
+            @foreach (var location in locations)
+            {
+                <tr>
+                    <td>@location.Name</td>
+                    <td>@location.VoucherCount</td>
+                    <td>
+                        @if (location.VoucherCount > 0)
+                        {
+                            <a href="/donations/food/getnow/@location.Name" class="btn btn-primary">Get Now</a>
+                        }
+                        else
+                        {
+                            <strong>Try Again later</strong>
+                        }
+
+                    </td>
+                </tr>
+            }
+
         </tbody>
     </table>
 </div>
+
+@code {
+
+    private Location[] locations = new Location[5];
+
+    protected override void OnInitialized()
+    {
+        Random rand = new Random();
+        locations[0] = new Location { Name = "WECARE Food Pantry", VoucherCount = rand.Next(10) };
+        locations[1] = new Location { Name = "Family Resource Assistance", VoucherCount = rand.Next(10) };
+        locations[2] = new Location { Name = "Sistrunk Market", VoucherCount = 0 };
+        locations[3] = new Location { Name = "Heaven's Kitchen", VoucherCount = 0 };
+        locations[4] = new Location { Name = "Donna's Caribbean Restaurant", VoucherCount = rand.Next(10) };
+    }
+
+    public class Location
+    {
+        public string? Name { get; set; }
+        public int? VoucherCount { get; set; }
+
+
+    }
+}
