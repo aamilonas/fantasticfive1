@@ -4,24 +4,21 @@
 @inject fantasticfive1.Data.LookupService lookupservice;
 @rendermode InteractiveServer
 
-<PageTitle>Resources</PageTitle>
-<h1>Resources</h1>
+<PageTitle>Support Squad: Resources</PageTitle>
+<h2 class="display-1">Resources</h2>
 
-<!-- Dropdown for unique items -->
-<div class="form-group">
-    <label for="resourceTypeDropdown">Select Resource Type:</label>
-    <select class="form-control" id="resourceTypeDropdown" @onchange="OnResourceTypeChanged">
-        <option value="" disabled>Select a resource</option> <!-- Default placeholder option -->
+<!-- Button Group for unique items -->
+    <div class="btn-group" role="group">
         @foreach (var item in resourceTypes)
         {
-            <option value="@item">@item</option>
+            @if(item == "Select a resource type...") continue;
+            <button type="button" class="btn color-1 text-light" @onclick="() => TypeChange(item)">@item</button>
         }
-    </select>
-</div>
+    </div>
 
 <div class="container">
-    <h1>Shelters</h1>
-    <table class="table table-light">
+    <h3 class="display-4 mt-2">Shelters</h3>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Name</th>
@@ -58,7 +55,6 @@
     // List of unique resource types
     private List<string> resourceTypes = new List<string>
     {
-        "Select a resource type...",
         "24 Hour Bathroom",
         "Church",
         "Shower",
@@ -80,9 +76,9 @@
     private string selectedResourceType = string.Empty;
 
     // Function that gets called when an item is selected
-    private async Task OnResourceTypeChanged(ChangeEventArgs e)
+    private async void TypeChange(string e)
     {
-        selectedResourceType = e.Value?.ToString();  // Get the selected value
+        selectedResourceType = e;  // Get the selected value
         if (!string.IsNullOrEmpty(selectedResourceType))
         {
             await getByType(selectedResourceType);  // Call the function with the selected type
