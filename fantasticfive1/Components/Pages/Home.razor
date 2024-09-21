@@ -31,6 +31,15 @@
     </div>
 </div>
 
+@if (weatherwarning)
+{<br>
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" style="font-size: 2rem; font-family: 'Arial'" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>
+            <strong>Warning</strong> Dangerous Heat Index: Find Shelter and Cool Off
+        </div>
+    </div>
+}
 <div class="button-group" style="margin-top: 2rem;">
     <NavLink href="shelters">
         <button class="btn"
@@ -38,6 +47,14 @@
             Shelters & Housing
         </button>
     </NavLink>
+
+    <NavLink href="resources">
+        <button class="btn mt-2"
+                style="background-color: #264653; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
+            Resources
+        </button>
+    </NavLink>
+
     <NavLink href="donations">
         <button class="btn mt-2"
             style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
@@ -63,6 +80,7 @@
 
     private WeatherResponse? weatherData;
     private bool getWeatherError;
+    private bool weatherwarning = false;
     private string currentTime = DateTime.Now.ToString("hh:mm:ss tt");
 
     private string CapitalizeDescription(string description)
@@ -91,7 +109,10 @@
         {
             getWeatherError = true;
         }
-
+        if (weatherData.Main.Temp > 60)
+        {
+            weatherwarning = true;
+        }
         StateHasChanged(); // Ensure the UI updates after loading the data
     }
 
