@@ -6,9 +6,9 @@
 @using System;
 
 <br/>
-
-<!-- Container for form elements to align them on the left side -->
-<div class="d-flex flex-column align-items-start" style="margin-left: 20px;">
+<PageTitle>Support Squad: Shelters</PageTitle>
+<h2 class="display-1">Shelters</h2>
+<div class="d-flex flex-row justify-content-between" style="margin-left: 20px;">
     <div class="form-check form-switch">
         <input class="form-check-input" style="font-size: 1.5rem;margin-right: 10px;" type="checkbox" role="switch" id="WomenChildren" @bind-value="WomenChildrenBool" @bind-value:event="onchange">
         <label class="form-check-label" style="font-size: 1.5rem;margin-right: 10px;" for="WomenChildren">Women and Child Friendly</label>
@@ -30,13 +30,13 @@
 </div>
 
 <div class="text-center my-3">
-    <button class="btn btn-link p-0" style="font-size: 2rem;" @onclick="RefreshShelters" disabled="@isRefreshing">
-        <i class="fas fa-sync-alt @(isRefreshing ? "fa-spin" : "")" style="font-size: 2rem;"></i>
+    <button class="btn color-2 w-100 text-light" style="font-size: 2rem;" @onclick="RefreshShelters" disabled="@isRefreshing">
+        <i class="fas fa-sync-alt @(isRefreshing ? "fa-spin" : "")" style="font-size: 2rem;"></i> Search Shelters
     </button>
 </div>
 
 <div class="container">
-    <h1>Shelters</h1>
+
     <table class="table table-light">
         <thead>
             <tr>
@@ -50,23 +50,15 @@
         <tbody>
             @foreach (var shelter in shelters)
             {
-                @if (PetFriendlyBool == true)
-                {
-                    @if (shelter.PetFriendly == false) continue;
-                }
-                @if (WomenChildrenBool == true)
-                {
-                    @if (shelter.Womens == false) continue;
-                    @if (shelter.ChildFriendly == false) continue;
-                }
 
-                                        <tr>
-                                            <td>@shelter.Name</td>
-                                            <td>@shelter.Address</td>
-                                            <td>@shelter.Hours</td>
-                                            <td>@shelter.PhoneNumber</td>
-                                            <td>@shelter.Distance.ToString("F1") Miles</td>
-                                        </tr>
+
+                                                                    <tr>
+                                                                        <td>@shelter.Name</td>
+                                                                        <td>@shelter.Address</td>
+                                                                        <td>@shelter.Hours</td>
+                                                                        <td>@shelter.PhoneNumber</td>
+                                                                        <td>@shelter.Distance.ToString("F1") Miles</td>
+                                                                    </tr>
             }
 
         </tbody>
