@@ -1,6 +1,6 @@
 ﻿namespace fantasticfive1.Models
 {
-    public class Shelter
+    public class HousingModel
     {
         // String properties
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 @page "/jobs"
 @attribute [StreamRendering]
-@inject SupportDataContext SupportDataContext
+@inject fantasticfive1.Data.LookupService lookupservice;
 
 <PageTitle>Jobs</PageTitle>
 <h1>Jobs</h1>
@@ -92,9 +92,10 @@
 
 @code {
 
-    private List<Job> jobs;
-    protected override async Task OnInitializedAsync()
+    private List<Job> jobs = new List<Job>();
+    protected override async void OnInitialized()
     {
-        jobs = await SupportDataContext.Jobs.ToListAsync();
+        jobs = await lookupservice.JobLookup();
+        int x = 0;
     }
 }

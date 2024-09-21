@@ -9,8 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddHttpClient();
-builder.Services.AddDbContext<SupportDataContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<fantasticfive1.Data.LookupService>();
+
+var connectionString = builder.Configuration.GetConnectionString("SupportDb");
+builder.Services.AddDbContextFactory<SupportDataContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
