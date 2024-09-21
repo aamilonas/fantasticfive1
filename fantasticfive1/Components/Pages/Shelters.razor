@@ -10,12 +10,12 @@
 <!-- Container for form elements to align them on the left side -->
 <div class="d-flex flex-column align-items-start" style="margin-left: 20px;">
     <div class="form-check form-switch">
-        <input class="form-check-input" style="font-size: 1.5rem;margin-right: 10px;" type="checkbox" role="switch" id="WomenChildren" @bind="WomenChildrenBool">
+        <input class="form-check-input" style="font-size: 1.5rem;margin-right: 10px;" type="checkbox" role="switch" id="WomenChildren" @bind-value="WomenChildrenBool" @bind-value:event="onchange">
         <label class="form-check-label" style="font-size: 1.5rem;margin-right: 10px;" for="WomenChildren">Women and Child Friendly</label>
     </div>
 
     <div class="form-check form-switch">
-        <input class="form-check-input" style="font-size: 1.5rem;margin-right: 10px;" type="checkbox" role="switch" id="PetFriendly" @bind="PetFriendlyBool">
+        <input class="form-check-input" style="font-size: 1.5rem;margin-right: 10px;" type="checkbox" role="switch" id="PetFriendly" @bind-value="PetFriendlyBool" @bind-value:event="onchange">
         <label class="form-check-label" style="font-size: 1.5rem;margin-right: 10px;" for="PetFriendly">Pet Friendly</label>
     </div>
     <br />
@@ -50,13 +50,23 @@
         <tbody>
             @foreach (var shelter in shelters)
             {
-                <tr>
-                    <td>@shelter.Name</td>
-                    <td>@shelter.Address</td>
-                    <td>@shelter.Hours</td>
-                    <td>@shelter.PhoneNumber</td>
-                    <td>@shelter.Distance.ToString("F1") Miles</td>
-                </tr>
+                @if (PetFriendlyBool == true)
+                {
+                    @if (shelter.PetFriendly == false) continue;
+                }
+                @if (WomenChildrenBool == true)
+                {
+                    @if (shelter.Womens == false) continue;
+                    @if (shelter.ChildFriendly == false) continue;
+                }
+
+                                        <tr>
+                                            <td>@shelter.Name</td>
+                                            <td>@shelter.Address</td>
+                                            <td>@shelter.Hours</td>
+                                            <td>@shelter.PhoneNumber</td>
+                                            <td>@shelter.Distance.ToString("F1") Miles</td>
+                                        </tr>
             }
 
         </tbody>
@@ -81,34 +91,34 @@
         shelters = await lookupservice.ShelterLookup();
         shelters.RemoveAll(shelter =>
             {
-            double maxDistance = double.Parse(MaxDistance);
-            double lat2 = double.Parse(shelter.Lat);
-            double lon2 = double.Parse(shelter.Lon);
+                double maxDistance = double.Parse(MaxDistance);
+                double lat2 = double.Parse(shelter.Lat);
+                double lon2 = double.Parse(shelter.Lon);
 
-            // Convert degrees to radians
-            double lat1Rad = DegreesToRadians(lat1);
-            double lon1Rad = DegreesToRadians(lon1);
-            double lat2Rad = DegreesToRadians(lat2);
-            double lon2Rad = DegreesToRadians(lon2);
+                // Convert degrees to radians
+                double lat1Rad = DegreesToRadians(lat1);
+                double lon1Rad = DegreesToRadians(lon1);
+                double lat2Rad = DegreesToRadians(lat2);
+                double lon2Rad = DegreesToRadians(lon2);
 
-            // Haversine formula
-            double dLat = lat2Rad - lat1Rad;
-            double dLon = lon2Rad - lon1Rad;
+                // Haversine formula
+                double dLat = lat2Rad - lat1Rad;
+                double dLon = lon2Rad - lon1Rad;
 
-            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
                        Math.Cos(lat1Rad) * Math.Cos(lat2Rad) * Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
-            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+                double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
-            double distance = R * c;
+                double distance = R * c;
 
-            // Assign the calculated distance to the shelter's Distance property
-            shelter.Distance = distance;
+                // Assign the calculated distance to the shelter's Distance property
+                shelter.Distance = distance;
 
-            // Remove shelter if its distance is greater than MaxDistance
-            return distance > maxDistance;
+                // Remove shelter if its distance is greater than MaxDistance
+                return distance > maxDistance;
             });
 
-        
+
 
     }
 
@@ -167,5 +177,5 @@
         isRefreshing = false;
     }
 
-    
+
 }
