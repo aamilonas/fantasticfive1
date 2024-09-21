@@ -18,8 +18,8 @@
                 <p class="card-text" style="margin: 0; color: black;">@job.Time to @job.Expires </p>
               </div>
               <ul class="list-group list-group-flush" style="margin-top:0;">
-                <li class="list-group-item" style="padding: 10px;">@job.Description</li>
-                <li class="list-group-item" style="padding: 10px;">@job.Experience</li>
+                <li class="list-group-item" style="padding: 10px;">Description: @job.Description</li>
+                <li class="list-group-item" style="padding: 10px;">Experience: @job.Experience</li>
                 <li class="list-group-item" style="padding: 10px;">
                     <a href="https://www.indeed.com/jobs?q=construction+jobs&l=Fort+Lauderdale%2C+FL&from=searchOnDesktopSerp&vjk=3d103a00ae674409&advn=9505405585411561">Apply</a>
                 </li>
@@ -29,15 +29,12 @@
         </div>
     }
 </div>
-
-
-
+    
 @code {
 
     private List<Job> jobs = new List<Job>();
     protected override async void OnInitialized()
     {
         jobs = await lookupservice.JobLookup();
-        Console.WriteLine($"Number of jobs retrieved: {jobs.Count}");
     }
 }

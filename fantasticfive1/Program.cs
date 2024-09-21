@@ -1,6 +1,7 @@
 using fantasticfive1.Components;
 using Microsoft.EntityFrameworkCore;
 
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
