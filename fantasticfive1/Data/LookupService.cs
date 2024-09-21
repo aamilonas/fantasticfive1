@@ -20,7 +20,7 @@ namespace fantasticfive1.Data
 
             try
             {
-                using (var connection = new SqlConnection(_config.GetConnectionString("SupportDb")))
+                using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
                 {
                     var sql = $@"SELECT Id, Name, Address, Lat, Lon, Hours, Phone, Free
                         FROM Food

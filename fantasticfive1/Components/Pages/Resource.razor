@@ -1,20 +1,42 @@
 @page "/resources"
-@attribute [StreamRendering]
+@using fantasticfive1.Models
+@using fantasticfive1.Data
+@inject fantasticfive1.Data.LookupService lookupservice;
+@rendermode InteractiveServer
 
 <PageTitle>Resources</PageTitle>
 <h1>Resources</h1>
 
-<p>This link shows the links to fetch the resources that a homeless person may need.</p>
+<!-- Dropdown for unique items -->
+<div class="form-group">
+    <label for="resourceTypeDropdown">Select Resource Type:</label>
+    <select class="form-control" id="resourceTypeDropdown" @bind="selectedResourceType">
+        @foreach (var item in resourceTypes)
+        {
+            <option value="@item">@item</option>
+        }
+    </select>
+</div>
 
-<ul>
-    <li><a href="/shelters">Homeless Shelter Directory</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-    <li><a href="https://www.homelessshelterdirectory.org/foodbanks/">Food Banks</a></li>
-</ul>
+@code {
+    // List of unique resource types
+    private List<string> resourceTypes = new List<string>
+    {
+        "24 Hour Bathroom",
+        "Church",
+        "Shower",
+        "Wifi",
+        "Shelter",
+        "24 Hour Cafe",
+        "Bathroom",
+        "Food Pantry",
+        "Cafe",
+        "Gym",
+        "Community Center",
+        "Resource Hub",
+        "Soup Kitchen"
+    };
+
+    // Selected resource type
+    private string selectedResourceType;
+}
