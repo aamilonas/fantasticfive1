@@ -32,13 +32,30 @@
 </div>
 
 @if (weatherwarning)
-{<br>
-    <div class="alert alert-danger d-flex align-items-center" role="alert">
-        <svg class="bi flex-shrink-0 me-2" style="font-size: 2rem; font-family: 'Arial'" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
-        <div>
-            <strong>Warning</strong> Dangerous Heat Index: Find Shelter and Cool Off
-        </div>
-    </div>
+{
+                                                                <br>
+                                                                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                                                            <i class="bi bi-exclamation-triangle-fill"></i>
+                                                                            <div class="mx-3 d-flex flex-row justify-content-evenly w-100">
+                                                                                <p class="my-0 align-self-center">Severe heat conditions are forecasted in your area. Please take care and find shelter</p>
+                                                                                <a 
+                                                                                    href="https://apex.oracle.com/pls/apex/r/gfledu/search-smart-database145634/shelters-near-me"
+                                                                                    class="btn btn-danger ms-auto">Find Near Me</a>
+                                                                            </div>
+                                                                        </div>
+}
+@if(String.Compare(currentTime, "9:00 AM") > 0)
+{
+     <br>
+                                                                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                                                                            <i class="bi bi-info-circle-fill"></i>
+                                                                            <div class="mx-3 d-flex flex-row justify-content-evenly w-100">
+                                                                                <p class="my-0 align-self-center">Do you have a safe place to stay?</p>
+                                                                                <a 
+                                                                                    href="https://apex.oracle.com/pls/apex/r/gfledu/search-smart-database145634/shelters-near-me"
+                                                                                    class="btn btn-info ms-auto">Find Near Me</a>
+                                                                            </div>
+                                                                        </div>
 }
 <div class="button-group" style="margin-top: 2rem;">
     <NavLink href="shelters">
@@ -58,7 +75,7 @@
     <NavLink href="donations">
         <button class="btn mt-2"
             style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">
-            Donations
+            Pay It Forward
         </button>
     </NavLink>
     <NavLink href="jobs">
