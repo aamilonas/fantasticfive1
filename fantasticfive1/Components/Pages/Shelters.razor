@@ -48,6 +48,13 @@
         <tbody>
             @foreach (var shelter in shelters)
             {
+                @if (WomenChildrenBool == true){
+                    if(shelter.Womens == false) continue;
+                    if(shelter.ChildFriendly == false) continue;
+                }
+                @if (PetFriendlyBool == true) {
+                    if(shelter.PetFriendly == false) continue;
+                }
                 <tr>
                     <td>@shelter.Name</td>
                     <td>@shelter.Address</td>
@@ -63,33 +70,29 @@
 @code {
     private List<Shelter> shelters = new List<Shelter>();
 
-    private int WomenChildren { get; set; } = 0;
-    private int PetFriendly { get; set; } = 0;
+    private bool WomenChildrenBool { get; set; }
+    private bool PetFriendlyBool { get; set; }
     private bool isRefreshing = false;
     private string MaxDistance;
+    private int WomenChildren {get; set;}
+    private int PetFriendly {get; set;}
 
     protected override async Task OnInitializedAsync()
     {
         shelters = await lookupservice.ShelterLookup();
+        WomenChildrenBool = false;
+        PetFriendlyBool = false;
     }
 
 
-    private bool WomenChildrenBool
-    {
-        get => WomenChildren == 1;
-        set => WomenChildren = value ? 1 : 0;
-    }
-
-    private bool PetFriendlyBool
-    {
-        get => PetFriendly == 1;
-        set => PetFriendly = value ? 1 : 0;
-    }
+   
     private async Task RefreshShelters()
     {
         isRefreshing = true;
 
         // Call the service method with the current filter values
+        WomenChildren = WomenChildrenBool ? 1 : 0;
+        PetFriendly = PetFriendlyBool ? 1 : 0;
         shelters = await lookupservice.ShelterLookupWQs(WomenChildren, PetFriendly);
 
         isRefreshing = false;
