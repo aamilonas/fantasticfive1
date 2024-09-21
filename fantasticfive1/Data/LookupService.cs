@@ -43,10 +43,22 @@ namespace fantasticfive1.Data
 
             try
             {
-                using (var connection = new SqlConnection(_config.GetConnectionString("SupportDb")))
+                using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
                 {
-                    var sql = $@"SELECT Name, Address, ShelterType, PhoneNumber, Hours, Womens, ChildFriendly, AllWelcome, PetFriendly
-                        FROM Shelters
+                    var sql = $@"SELECT 
+                                Id, 
+                                Name, 
+                                Address, 
+                                Lat, 
+                                Lon, 
+                                PhoneNumber, 
+                                Hours, 
+                                Womens, 
+                                Mens, 
+                                ChildFriendly, 
+                                PetFriendly, 
+                                AllWelcome
+                            FROM Shelters
                 ";
                     var _housing = await connection.QueryAsync<Shelter>(sql);
                     housing = _housing.ToList();
