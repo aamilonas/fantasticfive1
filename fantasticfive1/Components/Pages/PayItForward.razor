@@ -1,0 +1,62 @@
+@page "/donations/payitforward"
+@using Microsoft.EntityFrameworkCore
+@inject IDbContextFactory<SupportDataContext> SupportDataContextFactory
+
+<h1 class="display-1">Pay It Forward</h1>
+@if (@ShowCreate)
+{
+    <form>
+        <div class="mb-3">
+            <label for="donorName" class="form-label">Donor Name</label>
+            <input type="text" class="form-control" id="donorName" @bind="@NewDonation.DonorName">
+        </div>
+        <div class="mb-3">
+            <label for="donorEmail" class="form-label">Donor Email</label>
+            <input type="email" class="form-control" id="donorEmail" @bind="@NewDonation.DonorEmail">
+        </div>
+        <div class="mb-3">
+            <label for="passType" class="form-label">Donation Type</label>
+            <select id="passType" class="form-select" @bind="@NewDonation.PassType">
+                <option value=0>Food</option>
+                <option value=1>Hygiene</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="passCode" class="form-label">Pass Code</label>
+            <input id="passCode" type="text" class="form-control" @bind="@NewDonation.PassCode">
+        </div>
+        <div class="mb-3">
+            <label for="value" class="form-label">Pass Value</label>
+            <input id="value" type="text" class="form-control" @bind="@NewDonation.Value">
+        </div>
+        <button name="submit" type="submit" class="btn color-2" @onclick="CreateNewDonation">Submit</button>
+    </form>
+}
+else
+{
+    <h2>Thank you for Paying It Forward!</h2>
+}
+@code {
+
+
+    public bool ShowCreate { get; set; }
+    private SupportDataContext? _context;
+    public DonationPass? NewDonation { get; set; }
+    protected override void OnInitialized()
+    {
+        ShowCreate = true;
+        NewDonation = new DonationPass();
+    }
+
+    public async Task CreateNewDonation()
+    {
+        _context ??= await SupportDataContextFactory.CreateDbContextAsync();
+        if (NewDonation is not null)
+        {
+            _context?.DonationPasses.Add(NewDonation);
+            _context?.SaveChangesAsync();
+        }
+        ShowCreate = false;
+    }
+
+}
