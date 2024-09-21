@@ -4,18 +4,15 @@
 
 ## Members
 
-1. Angelo Milonas
-2. Chamara Spence
-3. Charlene Gilbert
-4. Jonaé Davidson
-5. Yanheng Chen
+1. Angelo Milonas - Developer
+2. Chamara Spence - Project Manager
+3. Charlene Gilbert - Developer
+4. Jonaé Davidson - Designer
+5. Yanheng Chen - Developer
 
 ## Technical Summary
 
-Web Application Framework: Blazor Server Side (.NET)
-QR Codes:
-Weather API: Open Weather
-Interactive Shelter Map: Oracle APEX
+| Blazor (.NET) | Apex Oracle | SQLite | Bootstrap | QR Code |
 
 ## How to Run App Locally
 

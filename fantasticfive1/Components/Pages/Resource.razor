@@ -17,7 +17,7 @@
     </div>
 
 <div class="container">
-    <h3 class="display-4 mt-2">Shelters</h3>
+    <h3 class="display-5 mt-2">@selectedResourceType</h3>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -74,6 +74,14 @@
 
     // Selected resource type
     private string selectedResourceType = string.Empty;
+
+    private async void OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(selectedResourceType))
+        {
+            await getByType(selectedResourceType);  // Call the function with the selected type
+        }
+    }
 
     // Function that gets called when an item is selected
     private async void TypeChange(string e)
