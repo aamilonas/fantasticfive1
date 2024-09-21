@@ -3,7 +3,7 @@
 <PageTitle>Pay it Forward - Food Passes</PageTitle>
 <div class="container">
     <h1>Pay it Forward - Food Passes</h1>
-    <table class="table table-light">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Location</th>
@@ -20,11 +20,11 @@
                     <td>
                         @if (location.VoucherCount > 0)
                         {
-                            <a href="/donations/food/getnow/@location.Name" class="btn btn-primary">Get Now</a>
+                            <a href="/donations/food/getnow/@location.Name" class="btn color-4 w-100">Get Now</a>
                         }
                         else
                         {
-                            <strong>Try Again later</strong>
+                            <p class="text-center"><strong>Try Again later</strong></p>
                         }
 
                     </td>
