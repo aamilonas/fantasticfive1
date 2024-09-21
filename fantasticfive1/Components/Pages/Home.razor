@@ -1,10 +1,11 @@
 ﻿@page "/"
-
+@inject IHttpClientFactory HttpClientFactory;
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 <div class="container mt-4">
+    
     <NavLink href="shelters"><button class="btn" style="background-color: #2A9D8F; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Shelters & Housing</button></NavLink>
     <NavLink href="donations"><button class="btn mt-2" style="background-color: #E9C46A; color: white; width: 100%; padding: 1.0rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Donations</button></NavLink>
     <NavLink href="jobs"><button class="btn mt-2" style="background-color: #F4A261; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Jobs</button></NavLink>
@@ -12,6 +13,11 @@
 @*     <button class="btn mt-2" style="background-color: #F9D5B0; color: white; width: 100%; padding: 1rem 0; font-size: 3.25rem; font-family: 'Arial', sans-serif; border-radius: 1.5rem;">Jobs</button> *@
 </div>
 
-@code{
+@code {
+    
+    //private string weatherIconUrl;
 
+    // protected override async Task OnInitializedAsync()
+    // {
+    // }
 }
