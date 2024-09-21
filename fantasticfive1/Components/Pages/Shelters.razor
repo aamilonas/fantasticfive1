@@ -1,41 +1,53 @@
-﻿@* @page "/shelters"
+﻿@page "/shelters"
 @using fantasticfive1.Models
+@using fantasticfive1.Data
+@inject fantasticfive1.Data.LookupService lookupservice;
 
-<h3>Shelters</h3>
+<h1>Shelters</h1>
 
-<div class="mb-3">
-    <Switch @ref="switch1" @bind-Value="agree" Label="Disabled switch checkbox input" />
+<br/>
+
+<div class="form-check form-switch">
+    <input class="form-check-input" style="font-size: 1.5rem;" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    <label class="form-check-label" style="font-size: 1.5rem;" for="flexSwitchCheckDefault">Women and Child Friendly</label>
 </div>
-<Button Color="ButtonColor.Secondary" @onclick="Disable"> Disable </Button>
-<Button Color="ButtonColor.Primary" @onclick="Enable"> Enable </Button>
+<div class="form-check form-switch">
+    <input class="form-check-input" style="font-size: 1.5rem;" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    <label class="form-check-label" style="font-size: 1.5rem;" for="flexSwitchCheckDefault">Include Paid Options</label>
+</div>
 
-<div class="row">
-    <div class="col-sm-6">
-        <Card>
-            <CardBody>
-                <CardTitle>Special title treatment</CardTitle>
-                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Link">Go somewhere</Button>
-            </CardBody>
-        </Card>
-    </div>
-    <div class="col-sm-6">
-        <Card>
-            <CardBody>
-                <CardTitle>Special title treatment</CardTitle>
-                <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                <Button Color="ButtonColor.Primary" To="#" Type="ButtonType.Link">Go somewhere</Button>
-            </CardBody>
-        </Card>
-    </div>
+<div class="container">
+    <h1>Shelters</h1>
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Hours</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shelter in shelters)
+            {
+                <tr>
+                    <td>@shelter.Name</td>
+                    <td>@shelter.Address</td>
+                    <td>@shelter.Hours</td>
+                    <td>@shelter.PhoneNumber</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
 </div>
 
 @code {
-    private Switch switch1 = default!;
-    private bool agree = true;
-
-    private void Disable() => switch1.Disable();
-
-    private void Enable() => switch1.Enable();
-}
- *@
+    private List<Shelter> shelters = new List<Shelter>();
+    protected override async void OnInitialized()
+    {
+        shelters = await lookupservice.ShelterLookup();
+        int x = 0;
+    }
+    
+    }

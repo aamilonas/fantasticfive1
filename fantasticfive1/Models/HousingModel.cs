@@ -10,8 +10,9 @@
         public string hours { get; set; }
 
         // Boolean properties
-        public bool Womens { get; set; }
-        public bool ChildFriendly { get; set; }
-        public bool AllWelcome { get; set; }
+        public int Womens { get; set; }
+        public int ChildFriendly { get; set; }
+        public int AllWelcome { get; set; }
+        public int PetFriendly { get; set; }
     }
 }
