@@ -10,7 +10,8 @@
 <!-- Dropdown for unique items -->
 <div class="form-group">
     <label for="resourceTypeDropdown">Select Resource Type:</label>
-    <select class="form-control" id="resourceTypeDropdown" @bind="selectedResourceType">
+    <select class="form-control" id="resourceTypeDropdown" @onchange="OnResourceTypeChanged">
+        <option value="" disabled>Select a resource</option> <!-- Default placeholder option -->
         @foreach (var item in resourceTypes)
         {
             <option value="@item">@item</option>
@@ -18,7 +19,42 @@
     </select>
 </div>
 
+<div class="container">
+    <h1>Shelters</h1>
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Hours</th>
+                <th>Phone</th>
+                <th>Type</th>
+                <th>Wifi</th>
+                <th>AC</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var landmark in landmarks)
+            {
+                <tr>
+                    <td>@landmark.Name</td>
+                    <td>@landmark.Address</td>
+                    <td>@landmark.Hours</td>
+                    <td>@landmark.PhoneNumber</td>
+                    <td>@landmark.Type</td>
+                    <td>@landmark.Wifi</td>
+                    <td>@landmark.AC</td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
 @code {
+
+    private List<Landmark> landmarks = new List<Landmark>();
     // List of unique resource types
     private List<string> resourceTypes = new List<string>
     {
@@ -37,6 +73,25 @@
         "Soup Kitchen"
     };
 
+
+
     // Selected resource type
-    private string selectedResourceType;
+    private string selectedResourceType = string.Empty;
+
+    // Function that gets called when an item is selected
+    private async Task OnResourceTypeChanged(ChangeEventArgs e)
+    {
+        selectedResourceType = e.Value?.ToString();  // Get the selected value
+        if (!string.IsNullOrEmpty(selectedResourceType))
+        {
+            await getByType(selectedResourceType);  // Call the function with the selected type
+        }
+    }
+
+    // Function to get landmarks by resource type
+    private async Task getByType(string type)
+    {
+        landmarks = await lookupservice.resourceByType(type);  // Fetch the landmarks
+        StateHasChanged();  // Refresh the UI after fetching new data
+    }
 }

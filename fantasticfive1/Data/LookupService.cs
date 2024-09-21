@@ -20,6 +20,11 @@ namespace fantasticfive1.Data
 
             try
             {
+                string dbPath = _config.GetConnectionString("SupportDb").Replace("Data Source=", "");
+                if (!System.IO.File.Exists(dbPath))
+                {
+                    Console.WriteLine($"Database file not found at {dbPath}");
+                }
                 using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
                 {
                     var sql = $@"SELECT Id, Name, Address, Lat, Lon, Hours, Phone, Free
@@ -137,6 +142,38 @@ namespace fantasticfive1.Data
 
             return landmarkLocs;
         }
+
+        public async Task<List<Landmark>> resourceByType(string type)
+        {
+            List<Landmark> landmarkLocs = new List<Landmark>();
+
+            try
+            {
+                using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
+                {
+                    // Log the type being queried
+                    Console.WriteLine($"Querying landmarks of type: {type}");
+
+                    // Parameterized query, using LOWER to handle case-insensitive search
+                    var sql = @"SELECT Id, Name, Address, Lat, Lon, Type, Hours, PhoneNumber, Wifi, AC
+                        FROM Landmarks
+                        WHERE LOWER(Type) = LOWER(@Type)";
+
+                    // Execute query and map the results to Landmark class
+                    var _landmarkLocs = await connection.QueryAsync<Landmark>(sql, new { Type = type });
+                    landmarkLocs = _landmarkLocs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error if needed
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return landmarkLocs;
+        }
+
+
 
         public async Task<List<Job>> JobLookup()
         {
