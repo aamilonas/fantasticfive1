@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using fantasticfive1.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddHttpClient();
+
+var connectionString = builder.Configuration.GetConnectionString("SupportDb");
+builder.Services.AddDbContextFactory<SupportDataContext>(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
