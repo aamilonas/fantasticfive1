@@ -31,16 +31,29 @@
     </div>
 </div>
 
-@if (true)
+@if (weatherwarning)
 {
                                                                 <br>
                                                                     <div class="alert alert-danger d-flex align-items-center" role="alert">
                                                                             <i class="bi bi-exclamation-triangle-fill"></i>
                                                                             <div class="mx-3 d-flex flex-row justify-content-evenly w-100">
-                                                                                <p class="my-0 align-self-center">Dangerous Heat Index: Find Shelter and Cool Off</p>
+                                                                                <p class="my-0 align-self-center">Dangerous Heat: Find Shelter and Cool Off</p>
                                                                                 <a 
                                                                                     href="https://apex.oracle.com/pls/apex/r/gfledu/search-smart-database145634/shelters-near-me"
                                                                                     class="btn btn-danger ms-auto">Find Near Me</a>
+                                                                            </div>
+                                                                        </div>
+}
+@if(String.Compare(currentTime, "9:00 AM") > 0)
+{
+     <br>
+                                                                    <div class="alert alert-info d-flex align-items-center" role="alert">
+                                                                            <i class="bi bi-info-circle-fill"></i>
+                                                                            <div class="mx-3 d-flex flex-row justify-content-evenly w-100">
+                                                                                <p class="my-0 align-self-center">Do you have a safe place to stay?</p>
+                                                                                <a 
+                                                                                    href="https://apex.oracle.com/pls/apex/r/gfledu/search-smart-database145634/shelters-near-me"
+                                                                                    class="btn btn-info ms-auto">Find Near Me</a>
                                                                             </div>
                                                                         </div>
 }
