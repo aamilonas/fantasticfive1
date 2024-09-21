@@ -1,0 +1,143 @@
+﻿using System.Data.SqlClient;
+using Dapper;
+using Microsoft.CodeAnalysis.Text;
+using fantasticfive1.Models;
+using Microsoft.Data.Sqlite;
+
+namespace fantasticfive1.Data
+{
+    public class LookupService
+    {
+        private readonly IConfiguration _config;
+        public LookupService(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public async Task<List<Food>> FoodLookup()
+        {
+            List<Food> foodLocs = new List<Food>();
+
+            try
+            {
+                using (var connection = new SqlConnection(_config.GetConnectionString("SupportDb")))
+                {
+                    var sql = $@"SELECT Id, Name, Address, Lat, Lon, Hours, Phone, Free
+                        FROM Food
+                ";
+                    var _foodLocs = await connection.QueryAsync<Food>(sql);
+                    foodLocs = _foodLocs.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // food lookup failed
+            }
+
+            return foodLocs;
+        }
+        public async Task<List<Shelter>> ShelterLookup()
+        {
+            List<Shelter> housing = new List<Shelter>();
+
+            try
+            {
+                using (var connection = new SqlConnection(_config.GetConnectionString("SupportDb")))
+                {
+                    var sql = $@"SELECT Name, Address, ShelterType, PhoneNumber, Hours, Womens, ChildFriendly, AllWelcome, PetFriendly
+                        FROM Shelters
+                ";
+                    var _housing = await connection.QueryAsync<Shelter>(sql);
+                    housing = _housing.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return housing;
+        }
+
+        public async Task<List<Landmark>> LandmarkLookup()
+        {
+            List<Landmark> landmarkLocs = new List<Landmark>();
+
+            try
+            {
+                using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
+                {
+                    // Query to select all columns from the Landmarks table
+                    var sql = @"SELECT Id, Name, Address, Lat, Lon, Type, Hours, PhoneNumber, Wifi, AC
+                        FROM Landmarks";
+
+                    // Execute query and map the results to Landmark class
+                    var _landmarkLocs = await connection.QueryAsync<Landmark>(sql);
+                    landmarkLocs = _landmarkLocs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error if needed
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return landmarkLocs;
+        }
+
+        public async Task<List<Job>> JobLookup()
+        {
+            List<Job> jobLocs = new List<Job>();
+
+            try
+            {
+                using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
+                {
+                    // Query to select all columns from the Jobs table
+                    var sql = @"SELECT Id, Title, Time, Experience, Description, Expires
+                        FROM Jobs";
+
+                    // Execute query and map the results to Job class
+                    var _jobLocs = await connection.QueryAsync<Job>(sql);
+                    jobLocs = _jobLocs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error if needed
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return jobLocs;
+        }
+
+        public async Task<List<DonationPass>> DonationPassLookup()
+        {
+            List<DonationPass> donationPassLocs = new List<DonationPass>();
+
+            try
+            {
+                using (var connection = new SqliteConnection(_config.GetConnectionString("SupportDb")))
+                {
+                    // Query to select all columns from the DonationPasses table
+                    var sql = @"SELECT Id, DonorName, DonorEmail, PassType, PassCode, Value
+                        FROM DonationPasses";
+
+                    // Execute query and map the results to DonationPass class
+                    var _donationPassLocs = await connection.QueryAsync<DonationPass>(sql);
+                    donationPassLocs = _donationPassLocs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the error if needed
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return donationPassLocs;
+        }
+
+    }
+}
